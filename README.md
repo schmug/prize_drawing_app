@@ -15,8 +15,8 @@ The application is designed with simplicity and mobile-friendliness in mind, all
     *   This allows for ongoing updates throughout the conference. As new members register, a new CSV can be imported to add them to the pool of eligible participants for subsequent drawings.
     *   The import process specifically filters for actual members, excluding guest registrations if marked accordingly in the CSV (expects an 'Is_Member?' column with 'Yes' for members).
 *   **Random Drawing Mechanism**: 
-    *   The application uses Python's built-in `random.choice()` function to select a winner from the pool of currently eligible members.
-    *   **Randomness Explanation**: `random.choice()` selects an item uniformly at random from a sequence. This means every member currently eligible for the drawing has an equal probability of being selected. For the purposes of a prize drawing at a conference, this level of pseudo-randomness is considered cryptographically sufficient and fair. It ensures that the selection is unbiased and that each draw is independent of previous draws (unless a winner is removed from the pool).
+    *   The application uses Python's `secrets.choice()` function (Python&nbsp;3.6+) to select a winner from the pool of currently eligible members.
+    *   **Randomness Explanation**: `secrets.choice()` selects an item uniformly at random from a sequence using a cryptographically stronger source of randomness than `random.choice()`. Every eligible member has an equal probability of being selected and each draw is independent of previous ones (unless a winner is removed from the pool).
 *   **Winner Handling**: 
     *   When a member is drawn, the administrator can mark the prize as "Claimed" or indicate that the person was "Not Here."
     *   **Claimed**: If the prize is claimed, the member is recorded as a winner and is made ineligible for future drawings in this event instance.
