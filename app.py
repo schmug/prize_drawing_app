@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
-import random
+import secrets
 import csv
 import os
 from datetime import datetime # Added for Winner timestamp
@@ -200,7 +200,7 @@ def draw():
         flash('No eligible members left to draw from!', 'warning')
         return redirect(url_for('index'))
 
-    winner = random.choice(eligible_members)
+    winner = secrets.choice(eligible_members)
     # Store winner data in session to display on index page after redirect
     session['winner_data'] = {
         'id': winner.id, 
