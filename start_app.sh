@@ -8,7 +8,7 @@ export FLASK_ENV=development # Enables debug mode among other things
 flask init-db
 
 # Run the Flask application on port 8080
-# The app.py itself is already configured to run on port 8080 with debug=True
+# The app.py itself is already configured to run on port 8080 with debug=False
 flask run --host=0.0.0.0 --port=8080
 
 # Alternative using python directly if you prefer (app.py already sets port and debug):
