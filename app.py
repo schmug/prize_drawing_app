@@ -256,7 +256,7 @@ def import_data_route():
         if file.filename == '':
             flash('No selected file', 'warning')
             return redirect(request.url)
-        if file and file.filename.endswith('.csv'):
+        if file and file.filename.lower().endswith('.csv'):
             filename = secure_filename(file.filename)
             save_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(save_path)
