@@ -76,6 +76,10 @@ The application is designed with simplicity and mobile-friendliness in mind, all
 *   **Flask Secret Key**: The `FLASK_SECRET_KEY` for session management must be set as an environment variable for production deployments.
 *   **Data Files**: Registrant CSV files, the live SQLite database (`drawing.db`), and environment files (`.env`, `.env.local`) are excluded from the Git repository via `.gitignore` to protect sensitive information. A template `.env.example` is provided for creating your own `.env.local` file.
 
+## License
+
+This project is released under the [MIT License](LICENSE).
+
 ---
 
 This README provides a functional overview. For detailed setup, deployment, and code structure, refer to the project files and associated deployment scripts. 
