@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Drawing App{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">NCLGISA Prize Drawing</h1>
+    <p class="lead">Click the button below to draw a random winner!</p>
+    <hr class="my-4">
+    <a href="{{ url_for('draw') }}" class="btn btn-primary btn-lg">Draw Winner</a>
+</div>
+
+{% if winner %}
+<div class="card mt-4">
+    <div class="card-header bg-success text-white">
+        Congratulations!
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{ winner.first_name }} {{ winner.last_name }}</h5>
+        <p class="card-text">Organization: {{ winner.organization }}</p>
+        <a href="{{ url_for('handle_winner', member_id=winner.id, action='claimed') }}" class="btn btn-success btn-block mb-2">Claimed Prize</a>
+        <a href="{{ url_for('handle_winner', member_id=winner.id, action='not_here') }}" class="btn btn-warning btn-block">Not Here (Redraw)</a>
+    </div>
+</div>
+{% endif %}
+
+{% if last_winner_info %}
+    <div class="alert alert-info mt-4" role="alert">
+        <strong>Last Claimed Winner:</strong> {{ last_winner_info.name }} ({{ last_winner_info.organization }})
+    </div>
+{% endif %}
+
+{% endblock %} 

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Import Data{% endblock %}
+
+{% block content %}
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Import CSV Data</h1>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="csvfile">Select CSV file to import:</label>
+        <input type="file" class="form-control-file" id="csvfile" name="csvfile" accept=".csv" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Import</button>
+</form>
+
+<hr>
+
+<h3>Current CSV File for Automatic Import:</h3>
+<p>The application is currently set to auto-import from: <code>{{ current_csv_path }}</code> on startup if the database is empty.</p>
+<p>If you upload a new file here, it will be processed immediately. For subsequent startups, the application will try to use the original default path if no new data is found.</p>
+
+{% endblock %} 

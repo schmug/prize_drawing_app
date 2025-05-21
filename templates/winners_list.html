@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Drawing Log{% endblock %}
+
+{% block content %}
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Drawing Audit Log</h1>
+</div>
+{% if winners %}
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Organization</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in winners %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entry.member.first_name }} {{ entry.member.last_name }}</td>
+                <td>{{ entry.member.organization }}</td>
+                <td>{{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>
+                    {% if entry.status == 'claimed' %}
+                        <span class="badge badge-success">Claimed</span>
+                    {% elif entry.status == 'not_here' %}
+                        <span class="badge badge-warning">Not Here</span>
+                    {% else %}
+                        {{ entry.status }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p>No drawing events have been logged yet.</p>
+{% endif %}
+{% endblock %} 

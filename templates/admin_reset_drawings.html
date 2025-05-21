@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - Reset Drawings{% endblock %}
+
+{% block content %}
+<div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Admin: Reset All Drawings</h1>
+</div>
+
+<div class="alert alert-danger" role="alert">
+    <strong>Warning!</strong> This action is irreversible. It will delete all winner logs and make all members eligible for drawing again.
+</div>
+
+<form method="POST" class="mt-4">
+    <div class="form-group">
+        <label for="confirmation_text">To confirm, please type "<strong>{{ confirmation_text_required }}</strong>" into the box below:</label>
+        <input type="text" class="form-control" id="confirmation_text" name="confirmation_text" required autocomplete="off">
+    </div>
+    <button type="submit" class="btn btn-danger">Reset All Drawings Now</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock %} 
