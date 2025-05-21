@@ -3,7 +3,8 @@
 
 # Environment variables
 .env
-.env.local # Local environment configurations
+# Local environment configurations
+.env.local
 
 # Uploads directory (for user-uploaded CSVs)
 uploads/

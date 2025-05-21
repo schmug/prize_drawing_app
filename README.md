@@ -74,7 +74,7 @@ The application is designed with simplicity and mobile-friendliness in mind, all
 
 *   **PIN**: The application access PIN is configured via the `DRAWING_APP_PIN` environment variable on the server. For local development without this variable set, it defaults to `123456`.
 *   **Flask Secret Key**: The `FLASK_SECRET_KEY` for session management must be set as an environment variable for production deployments.
-*   **Data Files**: Registrant CSV files, the live SQLite database (`drawing.db`), and environment files (`.env`, `.env.local`) are excluded from the Git repository via `.gitignore` to protect sensitive information.
+*   **Data Files**: Registrant CSV files, the live SQLite database (`drawing.db`), and environment files (`.env`, `.env.local`) are excluded from the Git repository via `.gitignore` to protect sensitive information. A template `.env.example` is provided for creating your own `.env.local` file.
 
 ---
 
