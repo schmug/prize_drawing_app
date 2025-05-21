@@ -114,6 +114,7 @@ def admin_reset_drawings():
 # --- Helper Functions ---
 def import_members_from_csv(csv_file_path, use_flash=True):
     members_added_count = 0
+    members_updated_count = 0
     members_skipped_count = 0
     try:
         with open(csv_file_path, mode='r', encoding='utf-8-sig') as infile: # utf-8-sig for potential BOM
@@ -149,14 +150,20 @@ def import_members_from_csv(csv_file_path, use_flash=True):
                     db.session.add(member)
                     members_added_count += 1
                 else:
-                    # Optional: Update logic if member data changes, for now, we skip if badge_id exists.
-                    # print(f"Member with badge ID {badge_id} already exists. Updating eligibility.")
-                    # if not existing_member.eligible_for_drawing and not Winner.query.filter_by(member_id=existing_member.id).first():
-                    #     existing_member.eligible_for_drawing = True # Re-eligible if no win recorded
-                    members_skipped_count +=1
+                    existing_member.first_name = first_name
+                    existing_member.last_name = last_name
+                    existing_member.organization = row.get('Organization', '')
+                    existing_member.email = email
+                    existing_member.is_member = True
+                    existing_member.eligible_for_drawing = True
+                    members_updated_count += 1
             db.session.commit()
         
-        message = f"Successfully imported/updated {members_added_count} members. Skipped {members_skipped_count} (duplicates/not members/missing data)."
+        message = (
+            f"Successfully added {members_added_count} members and updated "
+            f"{members_updated_count} members. Skipped {members_skipped_count} "
+            "(non-members/missing data)."
+        )
         if use_flash:
             flash(message, 'success')
         else:
