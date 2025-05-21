@@ -10,9 +10,11 @@ ARCHIVE_NAME="${APP_NAME}.tar.gz"
 if [ -f .env.local ]; then
     source .env.local
 fi
-REMOTE_USER="${REMOTE_USER:-shodanadmin}" # Default if not set in .env.local
-REMOTE_HOST="${REMOTE_HOST:-shodan1.nclgisa.org}" # Default if not set in .env.local
-# PRODUCTION_APP_PIN="908070" # REMOVED - This will be set manually on the server's .env file
+
+# Require REMOTE_USER and REMOTE_HOST to be provided via environment
+# variables or a local .env.local file. No hard-coded defaults.
+: "${REMOTE_USER:?REMOTE_USER not set. Define it in the environment or .env.local}"
+: "${REMOTE_HOST:?REMOTE_HOST not set. Define it in the environment or .env.local}"
 
 REMOTE_TEMP_UPLOAD_DIR="/tmp"
 PROJECT_DIR_ON_SERVER_BASE="/srv"
@@ -95,7 +97,7 @@ FLASK_APP=app.py
 FLASK_ENV=production
 FLASK_SECRET_KEY=${FLASK_SECRET_KEY_VALUE}
 # IMPORTANT: Set your production PIN here manually after script runs!
-DRAWING_APP_PIN="# YOUR_PRODUCTION_PIN_HERE (e.g., 908070)"
+DRAWING_APP_PIN="# YOUR_PRODUCTION_PIN_HERE (e.g., 000000)"
 EOTENV
 chown "${REMOTE_USER_ON_SERVER}:${REMOTE_USER_ON_SERVER}" "${ENV_FILE_PATH}" && chmod 600 "${ENV_FILE_PATH}"
 echo "IMPORTANT: .env file created. Please edit ${ENV_FILE_PATH} and set DRAWING_APP_PIN to your production PIN."
@@ -158,7 +160,7 @@ cat << EOF > "${REMOTE_APP_UPDATE_SCRIPT_NAME}"
 
 APP_NAME="nclgisa_drawing_app"
 ARCHIVE_NAME="${APP_NAME}.tar.gz"
-REMOTE_USER_ON_SERVER="shodanadmin" # Needs to match user in systemd service
+REMOTE_USER_ON_SERVER="${REMOTE_USER}" # Needs to match user in systemd service
 PROJECT_HOME_DIR_ON_SERVER="/srv"
 PROJECT_DIR_ON_SERVER="${PROJECT_HOME_DIR_ON_SERVER}/${APP_NAME}"
 
